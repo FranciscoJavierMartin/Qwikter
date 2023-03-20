@@ -7,8 +7,8 @@ export default component$(() => {
       <div class='logo-container'>
         <h1>Qwikter</h1>
       </div>
-      <div class='form'>
-        
+      <div class='auth-form'>
+
       </div>
     </div>
   );
