@@ -1,4 +1,5 @@
 import { component$ } from '@builder.io/qwik';
+import LoginForm from '~/components/auth/LoginForm';
 import './index.scss';
 
 export default component$(() => {
@@ -8,7 +9,7 @@ export default component$(() => {
         <h1>Qwikter</h1>
       </div>
       <div class='auth-form'>
-
+        <LoginForm />
       </div>
     </div>
   );
