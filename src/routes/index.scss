@@ -36,5 +36,8 @@
   }
 
   .auth-form {
+    display: grid;
+    place-items: center;
+    background-color: var(--primary-1);
   }
 }
