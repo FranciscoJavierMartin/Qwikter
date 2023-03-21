@@ -4,7 +4,8 @@ import Input from '~/components/shared/input/Input';
 import './LoginForm.scss';
 
 export default component$(() => {
-  const username = useSignal('hello');
+  const username = useSignal<string>('');
+  const password = useSignal<string>('');
 
   return (
     <div class='login-form'>
@@ -21,14 +22,17 @@ export default component$(() => {
             username.value = (event.target as any).value;
           }}
         />
-        <input
-          type='text'
-          value={username.value}
-          onInput$={(event) => {
-            username.value = (event.target as any).value;
+        <Input
+          id='password'
+          type='password'
+          name='password'
+          placeholder='Password'
+          value={password.value}
+          label='Password'
+          onInput$={(event: Event) => {
+            password.value = (event.target as any).value;
           }}
         />
-        {/* <input type='text' bind:value={username} /> */}
         <button type='submit'>Login</button>
       </Form>
     </div>
