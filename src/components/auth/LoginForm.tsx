@@ -33,7 +33,7 @@ export default component$(() => {
             password.value = (event.target as any).value;
           }}
         />
-        <button type='submit'>Login</button>
+        <button type='submit' >Login</button>
       </Form>
     </div>
   );
