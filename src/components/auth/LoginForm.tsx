@@ -10,7 +10,17 @@ export default component$(() => {
     <div class='login-form'>
       <h2>Login</h2>
       <Form>
-        <Input/>
+        <Input
+          id='username'
+          type='text'
+          name='username'
+          placeholder='Username'
+          value={username.value}
+          label='Username'
+          onInput$={(event: Event) => {
+            username.value = (event.target as any).value;
+          }}
+        />
         <input
           type='text'
           value={username.value}
