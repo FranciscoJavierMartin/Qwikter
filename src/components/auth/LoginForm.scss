@@ -1,16 +1,30 @@
-.login-form {
+.form-container {
   background-color: var(--white-1);
-  padding: 15px;
   border-radius: 15px;
+  padding: 15px;
 
   h2 {
-    text-align: center;
     margin-bottom: 0.25rem;
+    text-align: center;
   }
 
   form {
+    .checkmark-container {
+      align-items: baseline;
+      cursor: pointer;
+      display: flex;
+      font-size: 14px;
+      margin-top: 10px;
+      user-select: none;
+
+      input[type='checkbox'] {
+        margin-right: 5px;
+      }
+    }
+
     button {
       background-color: var(--primary-1);
+      border-radius: 0.25rem;
       border: 1px solid var(--primary-1);
       color: var(--white-1);
       cursor: pointer;
@@ -18,17 +32,16 @@
       font-weight: 700;
       line-height: 1.5;
       margin-top: 10px;
-      width: 100%;
       padding: 0.375rem 0.75rem;
-      border-radius: 0.25rem;
+      width: 100%;
       transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
         border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 
       &:disabled {
-        cursor: not-allowed;
-        pointer-events: none;
-        opacity: 0.5;
         border-color: var(--primary-1);
+        cursor: not-allowed;
+        opacity: 0.5;
+        pointer-events: none;
       }
     }
   }

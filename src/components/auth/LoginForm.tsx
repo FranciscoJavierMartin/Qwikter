@@ -6,9 +6,10 @@ import './LoginForm.scss';
 export default component$(() => {
   const username = useSignal<string>('');
   const password = useSignal<string>('');
+  const keepLogging = useSignal<boolean>(false);
 
   return (
-    <div class='login-form'>
+    <div class='form-container'>
       <h2>Login</h2>
       <Form>
         <Input
@@ -33,7 +34,17 @@ export default component$(() => {
             password.value = (event.target as any).value;
           }}
         />
-        <button type='submit' >Login</button>
+        <label for='checkbox' class='checkmark-container'>
+          <input
+            id='checkbox'
+            type='checkbox'
+            name='checkbox'
+            value={keepLogging.value.toString()}
+            onChange$={() => (keepLogging.value = !keepLogging.value)}
+          />
+          Keep me signed in
+        </label>
+        <button type='submit'>Login</button>
       </Form>
     </div>
   );
