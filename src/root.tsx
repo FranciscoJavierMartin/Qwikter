@@ -19,7 +19,9 @@ export default component$(() => {
     <QwikCityProvider>
       <head>
         <meta charSet='utf-8' />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel='manifest' href='/manifest.json' />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
       </head>
       <body lang='en'>
         <RouterOutlet />

@@ -1,0 +1,24 @@
+.page {
+  display: grid;
+  height: 100%;
+  width: 100%;
+  place-items: center;
+
+  .logo-container {
+    display: none;
+  }
+
+  .auth-form {
+    width: 100%;
+    display: grid;
+    justify-items: center;
+
+    .title {
+    }
+
+    .form-container {
+      margin-top: 70px;
+      width: 85%;
+    }
+  }
+}

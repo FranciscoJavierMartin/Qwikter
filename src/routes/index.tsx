@@ -1,6 +1,7 @@
 import { component$ } from '@builder.io/qwik';
 import LoginForm from '~/components/auth/LoginForm';
-import './index.scss';
+// import './index.scss';
+import './index-mobile.scss';
 
 export default component$(() => {
   return (
@@ -9,6 +10,7 @@ export default component$(() => {
         <h1>Qwikter</h1>
       </div>
       <div class='auth-form'>
+        <h1 class='title'>Qwikter</h1>
         <LoginForm />
       </div>
     </div>
