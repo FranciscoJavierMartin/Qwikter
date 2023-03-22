@@ -1,7 +1,6 @@
 import { component$ } from '@builder.io/qwik';
 import LoginForm from '~/components/auth/LoginForm';
-// import './index.scss';
-import './index-mobile.scss';
+import './index.scss';
 
 export default component$(() => {
   return (
