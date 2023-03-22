@@ -1,42 +1,40 @@
 .page {
+  background-image: url('~/assets/images/background.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   display: grid;
-  height: 100%;
-  width: 100%;
-  place-items: center;
   grid-template-areas: 'logo authform';
   grid-template-columns: 1fr 1fr;
+  height: 100%;
+  place-items: center;
+  position: relative;
+  width: 100%;
+  z-index: 1;
 
   @media screen and (max-width: 767px) {
-    background-image: url('~/assets/images/background.jpg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-    z-index: 1;
     grid-template-areas:
       'logo'
       'authform'
       '.';
     grid-template-rows: 1fr 4fr 1fr;
     grid-template-columns: 1fr;
-
-    &::before {
-      background: linear-gradient(
-        to bottom,
-        var(--primary-1),
-        var(--primary-2)
-      );
-      content: '';
-      display: block;
-      height: 100%;
-      left: 0;
-      opacity: 0.5;
-      position: absolute;
-      top: 0;
-      width: 100%;
-      z-index: -1;
-    }
   }
+
+  &::before {
+    background: linear-gradient(to bottom, var(--primary-1), var(--primary-2));
+    content: '';
+    display: block;
+    height: 100%;
+    left: 0;
+    opacity: 0.5;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: -1;
+  }
+
+
 
   .logo-container {
     grid-area: logo;
@@ -47,16 +45,19 @@
   }
 
   .auth-form {
-    grid-area: authform;
-    width: 100%;
     display: grid;
-    justify-items: center;
+    grid-area: authform;
+    max-width: 500px;
+    place-items: center;
+    width: 100%;
 
-    .title {
-      color: var(--white-1);
+    @media screen and (min-width: 768px) {
+      background-color: var(--primary-1);
+      height: 100%;
     }
 
     .form-container {
+      opacity: 1;
       width: 85%;
     }
   }
