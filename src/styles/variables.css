@@ -68,4 +68,7 @@
   --small-text: 0.875rem;
   --extra-small-text: 0.7em;
   --letter-spacing: 1px;
+  --tablet-size: 768px;
+  --tablet-down-size: calc(768px - 1px);
+  --desktop-size: 1040px;
 }
