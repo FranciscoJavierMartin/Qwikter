@@ -1,6 +1,7 @@
 import { component$, useSignal } from '@builder.io/qwik';
 import { Form } from '@builder.io/qwik-city';
 import Input from '~/components/shared/input/Input';
+import ArrowRight from '~/components/icons/ArrowRight';
 import './LoginForm.scss';
 
 export default component$(() => {
@@ -45,6 +46,12 @@ export default component$(() => {
           Keep me signed in
         </label>
         <button type='submit'>Login</button>
+        <a href='/forgot-password' class='forgot-password'>
+          <span>
+            Forgot password?
+            <ArrowRight />
+          </span>
+        </a>
       </Form>
     </div>
   );
