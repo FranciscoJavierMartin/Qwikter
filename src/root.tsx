@@ -19,9 +19,14 @@ export default component$(() => {
     <QwikCityProvider>
       <head>
         <meta charSet='utf-8' />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+        <meta
+          name='description'
+          content='Qwikter - The best social media app of the century'
+        />
         <link rel='manifest' href='/manifest.json' />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
+        <title>Qwikter - The best social media app of the century</title>
       </head>
       <body lang='en'>
         <RouterOutlet />
