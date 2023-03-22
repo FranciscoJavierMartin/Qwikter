@@ -4,6 +4,26 @@
   width: 100%;
   place-items: center;
 
+  background-image: url('~/assets/images/background.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  z-index: 1;
+
+  &::before {
+    background: linear-gradient(to bottom, var(--primary-1), var(--primary-2));
+    content: '';
+    display: block;
+    height: 100%;
+    left: 0;
+    opacity: 0.5;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: -1;
+  }
+
   .logo-container {
     display: none;
   }
@@ -14,6 +34,7 @@
     justify-items: center;
 
     .title {
+      color: var(--white-1);
     }
 
     .form-container {
