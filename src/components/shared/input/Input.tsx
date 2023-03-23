@@ -10,10 +10,11 @@ interface InputProps {
   label?: string;
   placeholder: string;
   onInput$: any;
+  errorMessage?: string[];
 }
 
 export default component$(
-  ({ label, name, className, ...props }: InputProps) => {
+  ({ label, name, className, errorMessage, ...props }: InputProps) => {
     return (
       <div class='input-row'>
         {label && (
@@ -21,7 +22,16 @@ export default component$(
             {label}
           </label>
         )}
-        <input name={name} class={`input ${className}`} {...props} />
+        <input
+          name={name}
+          class={`input ${className} ${errorMessage ? 'input-error' : ''}`}
+          {...props}
+        />
+        {errorMessage?.map((error) => (
+          <p key={`${name}_${error}`} class='error-message'>
+            {error}
+          </p>
+        ))}
       </div>
     );
   }

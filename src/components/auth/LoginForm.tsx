@@ -44,7 +44,6 @@ export default component$(() => {
     <div class='form-container'>
       <h2>Login</h2>
       <Form action={login}>
-        {login.value?.failed && <p>{login.value.fieldErrors?.password}</p>}
         <Input
           id='username'
           type='text'
@@ -55,6 +54,7 @@ export default component$(() => {
           onInput$={(event: Event) => {
             username.value = (event.target as any).value;
           }}
+          errorMessage={login.value?.fieldErrors?.username}
         />
         <Input
           id='password'
@@ -66,6 +66,7 @@ export default component$(() => {
           onInput$={(event: Event) => {
             password.value = (event.target as any).value;
           }}
+          errorMessage={login.value?.fieldErrors?.password}
         />
         <label for='checkbox' class='checkmark-container'>
           <input
