@@ -57,11 +57,8 @@ export default component$(() => {
           type='text'
           name='username'
           placeholder='Username'
-          value={username.value}
+          value={username}
           label='Username'
-          onInput$={(event: Event) => {
-            username.value = (event.target as any).value;
-          }}
           errorMessage={login.value?.fieldErrors?.username}
         />
         <Input
@@ -69,11 +66,8 @@ export default component$(() => {
           type='password'
           name='password'
           placeholder='Password'
-          value={password.value}
+          value={password}
           label='Password'
-          onInput$={(event: Event) => {
-            password.value = (event.target as any).value;
-          }}
           errorMessage={login.value?.fieldErrors?.password}
         />
         <label for='checkbox' class='checkmark-container'>
