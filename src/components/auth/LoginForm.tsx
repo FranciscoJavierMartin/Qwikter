@@ -1,4 +1,6 @@
+import type { NoSerialize } from '@builder.io/qwik';
 import { component$, useSignal, noSerialize } from '@builder.io/qwik';
+import type { FailReturn } from '@builder.io/qwik-city';
 import { Form, globalAction$, zod$, z } from '@builder.io/qwik-city';
 import Input from '~/components/shared/input/Input';
 import ArrowRight from '~/components/icons/ArrowRight';
@@ -6,6 +8,8 @@ import './LoginForm.scss';
 
 export const useLogin = globalAction$(
   async ({ username, password }, { fail, redirect }) => {
+    let res: FailReturn<{ message: string }> | NoSerialize<any>;
+
     try {
       const response = await fetch('http://localhost:5173/api/login', {
         method: 'POST',
@@ -20,15 +24,16 @@ export const useLogin = globalAction$(
 
       const responseBody = await response.json();
 
-      // TODO: One single return
       if (responseBody.error) {
-        return fail(responseBody.statusCode, { message: responseBody.message });
+        res = fail(responseBody.statusCode, { message: responseBody.message });
       } else {
-        return noSerialize(redirect(302, '/social/streams'));
+        res = noSerialize(redirect(302, '/social/streams'));
       }
     } catch (e) {
-      console.log('Error', e);
+      res = fail(400, { message: 'Something goes wrong' });
     }
+
+    return res;
   },
   zod$({
     username: z.string().min(4).max(8),
