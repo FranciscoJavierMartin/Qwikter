@@ -28,3 +28,15 @@ svg {
   margin-left: 2px;
   margin-top: 2px;
 }
+
+.alert {
+  padding: 0.5rem 1.25rem;
+  border-radius: 0.25rem;
+  margin-bottom: 1rem;
+
+  &-error {
+    background-color: var(--red-7);
+    border-color: var(--red-8);
+    color: var(--red-6);
+  }
+}
