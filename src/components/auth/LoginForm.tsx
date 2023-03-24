@@ -50,8 +50,10 @@ export default component$(() => {
   return (
     <div class='form-container'>
       <h2>Login</h2>
-      <Form action={login}>
+      <div class='alert alert-error' role='alert'>
         {login.value?.failed ? (login.value as any).message : 'No error'}
+      </div>
+      <Form action={login}>
         <Input
           id='username'
           type='text'
