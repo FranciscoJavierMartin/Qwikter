@@ -1,4 +1,4 @@
-import { component$, useSignal } from '@builder.io/qwik';
+import { component$, useSignal, noSerialize } from '@builder.io/qwik';
 import { Form, globalAction$, zod$, z } from '@builder.io/qwik-city';
 import Input from '~/components/shared/input/Input';
 import ArrowRight from '~/components/icons/ArrowRight';
@@ -18,21 +18,17 @@ export const useLogin = globalAction$(
         }),
       });
 
-      console.log(response.status);
       const responseBody = await response.json();
 
-      console.log(responseBody);
-
+      // TODO: One single return
       if (responseBody.error) {
         return fail(responseBody.statusCode, { message: responseBody.message });
       } else {
-        return redirect(302, '/social/streams');
+        return noSerialize(redirect(302, '/social/streams'));
       }
     } catch (e) {
       console.log('Error', e);
     }
-
-    return {};
   },
   zod$({
     username: z.string().min(4).max(8),
@@ -50,9 +46,11 @@ export default component$(() => {
   return (
     <div class='form-container'>
       <h2>Login</h2>
-      <div class='alert alert-error' role='alert'>
-        {login.value?.failed ? (login.value as any).message : 'No error'}
-      </div>
+      {login.value?.failed && (
+        <div class='alert alert-error' role='alert'>
+          {login.value.message}
+        </div>
+      )}
       <Form action={login}>
         <Input
           id='username'
