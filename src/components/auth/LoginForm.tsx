@@ -80,8 +80,7 @@ export default component$(() => {
             id='keepLogging'
             type='checkbox'
             name='keepLogging'
-            value={keepLogging.value.toString()}
-            onChange$={() => (keepLogging.value = !keepLogging.value)}
+            bind:checked={keepLogging}
           />
           Keep me signed in
         </label>
