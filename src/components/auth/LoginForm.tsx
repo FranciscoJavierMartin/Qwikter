@@ -51,7 +51,7 @@ export default component$(() => {
   return (
     <div class='form-container'>
       <h2>Login</h2>
-      {login.value?.failed && (
+      {login.value?.failed && login.value.message && (
         <div class='alert alert-error' role='alert'>
           {login.value.message}
         </div>
