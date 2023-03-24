@@ -5,9 +5,9 @@ import ArrowRight from '~/components/icons/ArrowRight';
 import './LoginForm.scss';
 
 export const useLogin = globalAction$(
-  async ({ username, password }) => {
+  async ({ username, password }, { fail, redirect }) => {
     try {
-      const test = await fetch('http://localhost:5173/api/login', {
+      const response = await fetch('http://localhost:5173/api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -17,15 +17,22 @@ export const useLogin = globalAction$(
           password,
         }),
       });
-      console.log(await test.json());
+
+      console.log(response.status);
+      const responseBody = await response.json();
+
+      console.log(responseBody);
+
+      if (responseBody.error) {
+        return fail(responseBody.statusCode, { message: responseBody.message });
+      } else {
+        return redirect(302, '/social/streams');
+      }
     } catch (e) {
-      console.log(e);
+      console.log('Error', e);
     }
 
-    return {
-      success: true,
-      userID: '',
-    };
+    return {};
   },
   zod$({
     username: z.string().min(4).max(8),
@@ -44,6 +51,7 @@ export default component$(() => {
     <div class='form-container'>
       <h2>Login</h2>
       <Form action={login}>
+        {login.value?.failed ? (login.value as any).message : 'No error'}
         <Input
           id='username'
           type='text'

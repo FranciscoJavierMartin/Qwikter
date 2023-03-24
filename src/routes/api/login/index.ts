@@ -1,10 +1,17 @@
 import type { RequestHandler } from '@builder.io/qwik-city';
 
 export const onPost: RequestHandler = async ({ json, parseBody }) => {
-  // put your DB access here, we are hard coding a response for simplicity.
+  const body = await parseBody();
 
-  console.log(await parseBody());
-  json(200, {
-    text: 'Hello world from login API',
+  const response = await fetch('http://localhost:3020/api/auth/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
+  });
+
+  json(response.status, {
+    ...(await response.json()),
   });
 };
