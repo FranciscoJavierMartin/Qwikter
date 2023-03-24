@@ -5,6 +5,7 @@ import { Form, globalAction$, zod$, z } from '@builder.io/qwik-city';
 import Input from '~/components/shared/input/Input';
 import ArrowRight from '~/components/icons/ArrowRight';
 import './LoginForm.scss';
+import Button from '../shared/button/Button';
 
 export const useLogin = globalAction$(
   async ({ username, password }, { fail, redirect }) => {
@@ -84,9 +85,13 @@ export default component$(() => {
           />
           Keep me signed in
         </label>
-        <button type='submit' disabled={login.isRunning}>
+        <Button
+          type='submit'
+          disabled={login.isRunning}
+          isLoading={login.isRunning}
+        >
           Login
-        </button>
+        </Button>
         <a href='/forgot-password' class='forgot-password'>
           <span>
             Forgot password?
