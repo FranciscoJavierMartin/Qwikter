@@ -86,7 +86,9 @@ export default component$(() => {
           />
           Keep me signed in
         </label>
-        <button type='submit'>Login</button>
+        <button type='submit' disabled={login.isRunning}>
+          Login
+        </button>
         <a href='/forgot-password' class='forgot-password'>
           <span>
             Forgot password?
