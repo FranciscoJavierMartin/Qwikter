@@ -14,7 +14,7 @@ import Input from '~/components/shared/input/Input';
 import ArrowRight from '~/components/icons/ArrowRight';
 import type { RegisterResponse, UserContextState } from '~/interfaces/user';
 import { KEEP_LOGGING_KEY, USERNAME_KEY } from '~/constants/localStorage';
-import './LoginForm.scss';
+import './AuthForm.scss';
 
 export const useLogin = globalAction$(
   async ({ username, password }, { fail }) => {
@@ -74,11 +74,15 @@ export default component$(() => {
           if ((e.detail.value as RegisterResponse).token) {
             userContext.user = (e.detail.value as RegisterResponse).user;
             userContext.token = e.detail.value.token!;
-            localStorage.setItem(USERNAME_KEY, username.value);
-            localStorage.setItem(
-              KEEP_LOGGING_KEY,
-              keepLogging.value.toString()
-            );
+
+            if (keepLogging.value) {
+              localStorage.setItem(USERNAME_KEY, username.value);
+              localStorage.setItem(
+                KEEP_LOGGING_KEY,
+                keepLogging.value.toString()
+              );
+            }
+
             navigate('/social/streams');
           }
         }}
@@ -122,6 +126,9 @@ export default component$(() => {
           </span>
         </a>
       </Form>
+      <div class='form-footer'>
+        Don't have an account? <a href='/register'>Register</a>
+      </div>
     </div>
   );
 });
