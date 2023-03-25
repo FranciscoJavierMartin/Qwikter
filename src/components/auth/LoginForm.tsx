@@ -3,9 +3,9 @@ import { component$, useSignal, noSerialize } from '@builder.io/qwik';
 import type { FailReturn } from '@builder.io/qwik-city';
 import { Form, globalAction$, zod$, z } from '@builder.io/qwik-city';
 import Input from '~/components/shared/input/Input';
+import Button from '~/components/shared/button/Button';
 import ArrowRight from '~/components/icons/ArrowRight';
 import './LoginForm.scss';
-import Button from '../shared/button/Button';
 
 export const useLogin = globalAction$(
   async ({ username, password }, { fail, redirect }) => {
