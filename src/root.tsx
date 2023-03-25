@@ -22,7 +22,7 @@ export default component$(() => {
    *
    * Dont remove the `<head>` and `<body>` elements.
    */
-  const userStore = useStore<UserContextState>({ name: '' });
+  const userStore = useStore<UserContextState>({} as UserContextState);
   useContextProvider(UserContext, userStore);
 
   return (

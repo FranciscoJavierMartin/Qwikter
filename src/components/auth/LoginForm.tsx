@@ -11,13 +11,13 @@ import Button from '~/components/shared/button/Button';
 import Checkbox from '~/components/shared/checkbox/Checkbox';
 import Input from '~/components/shared/input/Input';
 import ArrowRight from '~/components/icons/ArrowRight';
-import type { UserContextState } from '~/interfaces/user';
+import type { RegisterResponse, UserContextState } from '~/interfaces/user';
 import { UserContext } from '~/root';
 import './LoginForm.scss';
 
 export const useLogin = globalAction$(
   async ({ username, password }, { fail }) => {
-    let res: FailReturn<{ message: string }> | UserContextState;
+    let res: FailReturn<{ message: string }> | RegisterResponse;
 
     try {
       const response = await fetch('http://localhost:5173/api/login', {
@@ -55,7 +55,7 @@ export default component$(() => {
   const username = useSignal<string>('');
   const password = useSignal<string>('');
   const keepLogging = useSignal<boolean>(false);
-  const user = useContext<UserContextState>(UserContext);
+  const userContext = useContext<UserContextState>(UserContext);
   const navigate = useNavigate();
   const login = useLogin();
 
@@ -70,8 +70,9 @@ export default component$(() => {
       <Form
         action={login}
         onSubmitCompleted$={(e) => {
-          if ((e.detail.value as any).token) {
-            user.name = (e.detail.value as any).user.username;
+          if ((e.detail.value as RegisterResponse).token) {
+            userContext.user = (e.detail.value as RegisterResponse).user;
+            userContext.token = e.detail.value.token!
             navigate('/social/streams');
           }
         }}

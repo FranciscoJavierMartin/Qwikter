@@ -3,10 +3,10 @@ import type { UserContextState } from '~/interfaces/user';
 import { UserContext } from '~/root';
 
 export default component$(() => {
-  const user = useContext<UserContextState>(UserContext);
+  const userContext = useContext<UserContextState>(UserContext);
   return (
     <div>
-      <h1>Home page {user.name}</h1>
+      <h1>Home page {userContext.user?.username}</h1>
     </div>
   );
 });
