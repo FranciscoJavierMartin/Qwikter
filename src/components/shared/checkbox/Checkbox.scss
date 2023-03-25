@@ -1,0 +1,11 @@
+label {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  font-size: 14px;
+  user-select: none;
+
+  input[type='checkbox'] {
+    margin-right: 5px;
+  }
+}

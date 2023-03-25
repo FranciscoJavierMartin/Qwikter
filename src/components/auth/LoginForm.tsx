@@ -2,8 +2,9 @@ import type { NoSerialize } from '@builder.io/qwik';
 import { component$, useSignal, noSerialize } from '@builder.io/qwik';
 import type { FailReturn } from '@builder.io/qwik-city';
 import { Form, globalAction$, zod$, z } from '@builder.io/qwik-city';
-import Input from '~/components/shared/input/Input';
 import Button from '~/components/shared/button/Button';
+import Checkbox from '~/components/shared/checkbox/Checkbox';
+import Input from '~/components/shared/input/Input';
 import ArrowRight from '~/components/icons/ArrowRight';
 import './LoginForm.scss';
 
@@ -76,15 +77,12 @@ export default component$(() => {
           label='Password'
           errorMessage={login.value?.fieldErrors?.password}
         />
-        <label for='checkbox' class='checkmark-container'>
-          <input
-            id='keepLogging'
-            type='checkbox'
-            name='keepLogging'
-            bind:checked={keepLogging}
-          />
-          Keep me signed in
-        </label>
+        <Checkbox
+          id='keepLogging'
+          name='keepLogging'
+          label='Keep me signed in'
+          input={keepLogging}
+        />
         <Button
           type='submit'
           variant='primary'
