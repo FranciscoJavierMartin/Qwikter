@@ -1,0 +1,2 @@
+export const USERNAME_KEY = 'USERNAME_KEY';
+export const KEEP_LOGGING_KEY = 'KEEP_LOGGING_KEY';

@@ -7,12 +7,13 @@ import {
   z,
   useNavigate,
 } from '@builder.io/qwik-city';
+import { UserContext } from '~/root';
 import Button from '~/components/shared/button/Button';
 import Checkbox from '~/components/shared/checkbox/Checkbox';
 import Input from '~/components/shared/input/Input';
 import ArrowRight from '~/components/icons/ArrowRight';
 import type { RegisterResponse, UserContextState } from '~/interfaces/user';
-import { UserContext } from '~/root';
+import { KEEP_LOGGING_KEY, USERNAME_KEY } from '~/constants/localStorage';
 import './LoginForm.scss';
 
 export const useLogin = globalAction$(
@@ -72,7 +73,12 @@ export default component$(() => {
         onSubmitCompleted$={(e) => {
           if ((e.detail.value as RegisterResponse).token) {
             userContext.user = (e.detail.value as RegisterResponse).user;
-            userContext.token = e.detail.value.token!
+            userContext.token = e.detail.value.token!;
+            localStorage.setItem(USERNAME_KEY, username.value);
+            localStorage.setItem(
+              KEEP_LOGGING_KEY,
+              keepLogging.value.toString()
+            );
             navigate('/social/streams');
           }
         }}
