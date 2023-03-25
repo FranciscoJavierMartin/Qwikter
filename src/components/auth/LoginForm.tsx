@@ -87,6 +87,7 @@ export default component$(() => {
         </label>
         <Button
           type='submit'
+          variant='primary'
           disabled={login.isRunning}
           isLoading={login.isRunning}
         >

@@ -2,12 +2,17 @@ import type { QwikIntrinsicElements } from '@builder.io/qwik';
 import { component$, Slot } from '@builder.io/qwik';
 import './Button.scss';
 
-type ButtonProps = QwikIntrinsicElements['button'] & { isLoading?: boolean };
+type ButtonVariant = 'primary';
 
-export default component$(({ isLoading, ...props }: ButtonProps) => {
-  return (
-    <button class={{ loader: isLoading }} {...props}>
+type ButtonProps = QwikIntrinsicElements['button'] & {
+  isLoading?: boolean;
+  variant?: ButtonVariant;
+};
+
+export default component$(
+  ({ isLoading, variant = 'primary', ...props }: ButtonProps) => (
+    <button class={{ [variant]: true, loader: isLoading }} {...props}>
       {!isLoading && <Slot />}
     </button>
-  );
-});
+  )
+);
