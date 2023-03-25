@@ -1,16 +1,23 @@
-import type { NoSerialize } from '@builder.io/qwik';
-import { component$, useSignal, noSerialize } from '@builder.io/qwik';
+import { component$, useSignal, useContext } from '@builder.io/qwik';
 import type { FailReturn } from '@builder.io/qwik-city';
-import { Form, globalAction$, zod$, z } from '@builder.io/qwik-city';
+import {
+  Form,
+  globalAction$,
+  zod$,
+  z,
+  useNavigate,
+} from '@builder.io/qwik-city';
 import Button from '~/components/shared/button/Button';
 import Checkbox from '~/components/shared/checkbox/Checkbox';
 import Input from '~/components/shared/input/Input';
 import ArrowRight from '~/components/icons/ArrowRight';
+import type { UserContextState } from '~/interfaces/user';
+import { UserContext } from '~/root';
 import './LoginForm.scss';
 
 export const useLogin = globalAction$(
-  async ({ username, password }, { fail, redirect }) => {
-    let res: FailReturn<{ message: string }> | NoSerialize<any>;
+  async ({ username, password }, { fail }) => {
+    let res: FailReturn<{ message: string }> | UserContextState;
 
     try {
       const response = await fetch('http://localhost:5173/api/login', {
@@ -29,7 +36,7 @@ export const useLogin = globalAction$(
       if (responseBody.error) {
         res = fail(responseBody.statusCode, { message: responseBody.message });
       } else {
-        res = noSerialize(redirect(302, '/social/streams'));
+        res = responseBody;
       }
     } catch (e) {
       res = fail(400, { message: 'Something goes wrong' });
@@ -48,6 +55,8 @@ export default component$(() => {
   const username = useSignal<string>('');
   const password = useSignal<string>('');
   const keepLogging = useSignal<boolean>(false);
+  const user = useContext<UserContextState>(UserContext);
+  const navigate = useNavigate();
   const login = useLogin();
 
   return (
@@ -58,7 +67,15 @@ export default component$(() => {
           {login.value.message}
         </div>
       )}
-      <Form action={login}>
+      <Form
+        action={login}
+        onSubmitCompleted$={(e) => {
+          if ((e.detail.value as any).token) {
+            user.name = (e.detail.value as any).user.username;
+            navigate('/social/streams');
+          }
+        }}
+      >
         <Input
           id='username'
           type='text'
