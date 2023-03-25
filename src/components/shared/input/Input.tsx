@@ -1,39 +1,44 @@
-import type { Signal } from '@builder.io/qwik';
+import type { Signal, QwikIntrinsicElements } from '@builder.io/qwik';
 import { component$ } from '@builder.io/qwik';
 import './Input.scss';
 
-interface InputProps {
-  id: string;
-  name: string;
-  type: 'text' | 'email' | 'password';
+type InputProps = Omit<QwikIntrinsicElements['input'], 'value'> & {
   value: Signal<string>;
   className?: string;
   label?: string;
-  placeholder: string;
   errorMessage?: string[];
-}
+};
 
 export default component$(
-  ({ label, name, className, errorMessage, value, ...props }: InputProps) => {
-    return (
-      <div class='input-row'>
-        {label && (
-          <label for={name} class='input-label'>
-            {label}
-          </label>
-        )}
-        <input
-          name={name}
-          class={`input ${className} ${errorMessage ? 'input-error' : ''}`}
-          bind:value={value}
-          {...props}
-        />
-        {errorMessage?.map((error) => (
-          <p key={`${name}_${error}`} class='error-message'>
-            {error}
-          </p>
-        ))}
-      </div>
-    );
-  }
+  ({
+    label,
+    name,
+    className = '',
+    errorMessage,
+    value,
+    ...props
+  }: InputProps) => (
+    <div class='input-row'>
+      {label && (
+        <label for={name} class='input-label'>
+          {label}
+        </label>
+      )}
+      <input
+        {...props}
+        name={name}
+        class={{
+          input: true,
+          className,
+          'input-error': errorMessage?.length,
+        }}
+        bind:value={value}
+      />
+      {errorMessage?.map((error) => (
+        <p key={`${name}_${error}`} class='error-message'>
+          {error}
+        </p>
+      ))}
+    </div>
+  )
 );

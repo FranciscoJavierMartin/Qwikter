@@ -11,7 +11,7 @@ type ButtonProps = QwikIntrinsicElements['button'] & {
 
 export default component$(
   ({ isLoading, variant = 'primary', ...props }: ButtonProps) => (
-    <button class={{ [variant]: true, loader: isLoading }} {...props}>
+    <button {...props} class={{ [variant]: true, loader: isLoading }}>
       {!isLoading && <Slot />}
     </button>
   )

@@ -2,7 +2,7 @@ import type { QwikIntrinsicElements, Signal } from '@builder.io/qwik';
 import { component$ } from '@builder.io/qwik';
 import './Checkbox.scss';
 
-type CheckboxProps = Omit<QwikIntrinsicElements['input'], 'type'> & {
+type CheckboxProps = Omit<QwikIntrinsicElements['input'], 'type' | 'value'> & {
   label: string;
   input: Signal<boolean>;
 };
