@@ -77,10 +77,9 @@ export default component$(() => {
 
             if (keepLogging.value) {
               localStorage.setItem(USERNAME_KEY, username.value);
-              localStorage.setItem(
-                KEEP_LOGGING_KEY,
-                keepLogging.value.toString()
-              );
+              localStorage.setItem(KEEP_LOGGING_KEY, 'true');
+            } else {
+              localStorage.removeItem(KEEP_LOGGING_KEY);
             }
 
             navigate('/social/streams');
