@@ -7,8 +7,9 @@ import {
   z,
 } from '@builder.io/qwik-city';
 import type { RegisterResponse } from '~/interfaces/user';
-import Input from '~/components/shared/input/Input';
 import Button from '~/components/shared/button/Button';
+import Input from '~/components/shared/input/Input';
+import PasswordInput from '~/components/shared/password-input/PasswordInput';
 import './AuthForm.scss';
 
 const registrationFormValidation = z
@@ -17,7 +18,6 @@ const registrationFormValidation = z
     password: z.string().min(4).max(8),
     confirmPassword: z.string().min(4).max(8),
     email: z.string().email(),
-    keepLogging: z.coerce.boolean().optional(),
   })
   .refine((o) => o.confirmPassword === o.password, {
     message: 'Password fields do not match',
@@ -92,19 +92,17 @@ export default component$(() => {
           label='Email'
           errorMessage={register.value?.fieldErrors?.email}
         />
-        <Input
+        <PasswordInput
           id='password'
           name='password'
-          type='password'
           placeholder='Password'
           value={password}
           label='Password'
           errorMessage={register.value?.fieldErrors?.password}
         />
-        <Input
+        <PasswordInput
           id='confirmPassword'
           name='confirmPassword'
-          type='password'
           placeholder='Confirm password'
           value={confirmPassword}
           label='Confirm password'
