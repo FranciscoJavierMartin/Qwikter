@@ -48,7 +48,6 @@ export const useLogin = globalAction$(
   zod$({
     username: z.string().min(4).max(8),
     password: z.string().min(4).max(8),
-    keepLogging: z.coerce.boolean().optional(),
   })
 );
 
