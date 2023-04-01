@@ -1,15 +1,15 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@builder.io/qwik': 0.24.0
-  '@builder.io/qwik-city': 0.7.0
+  '@builder.io/qwik': 0.100.0
+  '@builder.io/qwik-city': 0.100.0
   '@types/eslint': 8.21.3
-  '@types/node': ^18.15.3
+  '@types/node': ^18.15.9
   '@typescript-eslint/eslint-plugin': 5.56.0
   '@typescript-eslint/parser': 5.56.0
   eslint: 8.36.0
-  eslint-plugin-qwik: 0.24.0
-  prettier: 2.8.6
+  eslint-plugin-qwik: 0.100.0
+  prettier: 2.8.7
   sass: ^1.59.3
   typescript: 5.0.2
   undici: 5.21.0
@@ -17,30 +17,30 @@ specifiers:
   vite-tsconfig-paths: 3.5.0
 
 devDependencies:
-  '@builder.io/qwik': 0.24.0_undici@5.21.0
-  '@builder.io/qwik-city': 0.7.0_@builder.io+qwik@0.24.0
+  '@builder.io/qwik': 0.100.0_undici@5.21.0
+  '@builder.io/qwik-city': 0.100.0_@builder.io+qwik@0.100.0
   '@types/eslint': 8.21.3
-  '@types/node': 18.15.3
+  '@types/node': 18.15.9
   '@typescript-eslint/eslint-plugin': 5.56.0_2hcjazgfnbtq42tcc73br2vup4
   '@typescript-eslint/parser': 5.56.0_j4766f7ecgqbon3u7zlxn5zszu
   eslint: 8.36.0
-  eslint-plugin-qwik: 0.24.0_eslint@8.36.0
-  prettier: 2.8.6
+  eslint-plugin-qwik: 0.100.0_eslint@8.36.0
+  prettier: 2.8.7
   sass: 1.59.3
   typescript: 5.0.2
   undici: 5.21.0
-  vite: 4.2.1_bbhgkqmop4v24vevyan3j2nitq
+  vite: 4.2.1_vcevpaqgghsmc3mknz3mmh3xiq
   vite-tsconfig-paths: 3.5.0_vite@4.2.1
 
 packages:
 
-  /@builder.io/qwik-city/0.7.0_@builder.io+qwik@0.24.0:
-    resolution: {integrity: sha512-+P/nLl8tpQVfTGkFybYlag4atUkwXQpsFE+8yAmxAH+lcxHPW3GwtYPS6QwMKkL5dlFM0VML4kKFiQYQ1r7CGw==}
+  /@builder.io/qwik-city/0.100.0_@builder.io+qwik@0.100.0:
+    resolution: {integrity: sha512-EEZ8q10vmEjOOe5qQIel+jLcuuFYOjakIIgHt5KOWnY/L0HBw9xzFDkFDcdmPJlrCmHTm3y4T1ZtqKPEFNgO9w==}
     engines: {node: '>=16.8.0 <18.0.0 || >=18.11'}
     peerDependencies:
       '@builder.io/qwik': '>=0.22.0'
     dependencies:
-      '@builder.io/qwik': 0.24.0_undici@5.21.0
+      '@builder.io/qwik': 0.100.0_undici@5.21.0
       '@mdx-js/mdx': 2.3.0
       '@types/mdx': 2.0.3
       source-map: 0.7.4
@@ -50,8 +50,8 @@ packages:
       - supports-color
     dev: true
 
-  /@builder.io/qwik/0.24.0_undici@5.21.0:
-    resolution: {integrity: sha512-IOlcV1g37MJpFovbNLgcEoEBIOkeGaAvTqi2xdM4/pR0VmGubLFBpgsdQ8kUV6rp8ON7GmAZP0tOsxOAyYRt8g==}
+  /@builder.io/qwik/0.100.0_undici@5.21.0:
+    resolution: {integrity: sha512-p2DAHZTkPFVN3fz3I6Ael6pLLdlzf89owPJVAIoQ9vt5jULnDJRf096qGc84Y+gaoqfoFWBYHYVnHOP0fnRjQg==}
     engines: {node: '>=16.8.0 <18.0.0 || >=18.11'}
     hasBin: true
     peerDependencies:
@@ -432,8 +432,8 @@ packages:
     resolution: {integrity: sha512-iiUgKzV9AuaEkZqkOLDIvlQiL6ltuZd9tGcW3gwpnX8JbuiuhFlEGmmFXEXkN50Cvq7Os88IY2v0dkDqXYWVgA==}
     dev: true
 
-  /@types/node/18.15.3:
-    resolution: {integrity: sha512-p6ua9zBxz5otCmbpb5D3U4B5Nanw6Pk3PPyX05xnxbB/fRv71N7CPmORg7uAD5P70T0xmx1pzAx/FUfa5X+3cw==}
+  /@types/node/18.15.9:
+    resolution: {integrity: sha512-dUxhiNzBLr6IqlZXz6e/rN2YQXlFgOei/Dxy+e3cyXTJ4txSUbGT2/fmnD6zd/75jDMeW5bDee+YXxlFKHoV0A==}
     dev: true
 
   /@types/semver/7.3.13:
@@ -927,8 +927,8 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /eslint-plugin-qwik/0.24.0_eslint@8.36.0:
-    resolution: {integrity: sha512-2anjaJVyDWuUPEYQcLmQb6HrIGADnjkjIWtH/0Zxog2xiLd9gB2LIeEOuYtllHOePz2Ulq5m4X4vjx7CS8sbUA==}
+  /eslint-plugin-qwik/0.100.0_eslint@8.36.0:
+    resolution: {integrity: sha512-ubkyPdvlA1ProIpivu4N0oemvFYWgz7EOToFRnWc7IaxdPDvsZGcqDtf0gtNHyze1VR/PJ99nQZ6to8L/PLtag==}
     engines: {node: '>=16'}
     peerDependencies:
       eslint: '>= 8'
@@ -2211,8 +2211,8 @@ packages:
     engines: {node: '>= 0.8.0'}
     dev: true
 
-  /prettier/2.8.6:
-    resolution: {integrity: sha512-mtuzdiBbHwPEgl7NxWlqOkithPyp4VN93V7VeHVWBF+ad3I5avc0RVDT4oImXQy9H/AqxA2NSQH8pSxHW6FYbQ==}
+  /prettier/2.8.7:
+    resolution: {integrity: sha512-yPngTo3aXUUmyuTjeTUT75txrf+aMh9FiD7q9ZE/i6r0bPb22g4FsE6Y338PQX1bmfy08i9QQCB7/rcUAVntfw==}
     engines: {node: '>=10.13.0'}
     hasBin: true
     dev: true
@@ -2693,12 +2693,12 @@ packages:
       globrex: 0.1.2
       recrawl-sync: 2.2.3
       tsconfig-paths: 4.1.2
-      vite: 4.2.1_bbhgkqmop4v24vevyan3j2nitq
+      vite: 4.2.1_vcevpaqgghsmc3mknz3mmh3xiq
     transitivePeerDependencies:
       - supports-color
     dev: true
 
-  /vite/4.2.1_bbhgkqmop4v24vevyan3j2nitq:
+  /vite/4.2.1_vcevpaqgghsmc3mknz3mmh3xiq:
     resolution: {integrity: sha512-7MKhqdy0ISo4wnvwtqZkjke6XN4taqQ2TBaTccLIpOKv7Vp2h4Y+NpmWCnGDeSvvn45KxvWgGyb0MkHvY1vgbg==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -2723,7 +2723,7 @@ packages:
       terser:
         optional: true
     dependencies:
-      '@types/node': 18.15.3
+      '@types/node': 18.15.9
       esbuild: 0.17.13
       postcss: 8.4.21
       resolve: 1.22.1
