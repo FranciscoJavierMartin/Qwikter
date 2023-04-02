@@ -1,16 +1,6 @@
-import {
-  component$,
-  useSignal,
-  useTask$,
-  useVisibleTask$,
-} from '@builder.io/qwik';
-import {
-  FailReturn,
-  Form,
-  globalAction$,
-  zod$,
-  z,
-} from '@builder.io/qwik-city';
+import { component$, useSignal, useVisibleTask$ } from '@builder.io/qwik';
+import type { FailReturn } from '@builder.io/qwik-city';
+import { Form, globalAction$, zod$, z } from '@builder.io/qwik-city';
 import type { RegisterResponse } from '~/interfaces/user';
 import Button from '~/components/shared/button/Button';
 import Input from '~/components/shared/input/Input';
@@ -31,35 +21,37 @@ const registrationFormValidation = z
   });
 
 export const useRegister = globalAction$(
-  async ({ username, password, email, avatar }, { fail }) => {
-    // let res: FailReturn<{ message: string }> | RegisterResponse;
-    // if (password !== confirmPassword) {
-    //   res = fail(400, { message: "Passwords don't match" });
-    // } else {
-    //   try {
-    //     const response = await fetch('http://localhost:5173/api/login', {
-    //       method: 'POST',
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //       },
-    //       body: JSON.stringify({
-    //         username,
-    //         password,
-    //       }),
-    //     });
-    //     const responseBody = await response.json();
-    //     if (responseBody.error) {
-    //       res = fail(responseBody.statusCode, {
-    //         message: responseBody.message,
-    //       });
-    //     } else {
-    //       res = responseBody;
-    //     }
-    //   } catch (e) {
-    //     res = fail(400, { message: 'Something goes wrong' });
-    //   }
-    // }
-    // return res;
+  async ({ username, password, email }, { fail }) => {
+    let res: FailReturn<{ message: string }> | RegisterResponse;
+
+    try {
+      const response = await fetch('http://localhost:5173/api/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username,
+          email,
+          password,
+          avatarColor: 'blue',
+        }),
+      });
+
+      const responseBody = await response.json();
+
+      if (responseBody.error) {
+        res = fail(responseBody.statusCode, {
+          message: responseBody.message,
+        });
+      } else {
+        res = responseBody;
+      }
+    } catch (e) {
+      res = fail(400, { message: 'Something goes wrong' });
+    }
+
+    return res;
   },
   zod$(registrationFormValidation)
 );
@@ -69,7 +61,6 @@ export default component$(() => {
   const email = useSignal<string>('');
   const password = useSignal<string>('');
   const confirmPassword = useSignal<string>('');
-  const keepLogging = useSignal<boolean>(false);
   const imgSrc = useSignal<string>('');
   const register = useRegister();
 
@@ -92,8 +83,12 @@ export default component$(() => {
       {imgSrc.value && (
         <img src={imgSrc.value} alt='no image' width={200} height={200} />
       )}
-      <Form action={register}>
-        <input type='hidden' bind:value={imgSrc} name='avatar' />
+      <Form
+        action={register}
+        onSubmitCompleted$={(e) => {
+          console.log('Success', e.detail.value as RegisterResponse);
+        }}
+      >
         <Input
           id='username'
           name='username'
