@@ -1,4 +1,9 @@
-import { component$, useSignal } from '@builder.io/qwik';
+import {
+  component$,
+  useSignal,
+  useTask$,
+  useVisibleTask$,
+} from '@builder.io/qwik';
 import {
   FailReturn,
   Form,
@@ -11,6 +16,7 @@ import Button from '~/components/shared/button/Button';
 import Input from '~/components/shared/input/Input';
 import PasswordInput from '~/components/shared/password-input/PasswordInput';
 import './AuthForm.scss';
+import { generateAvatar } from '~/utils/colors';
 
 const registrationFormValidation = z
   .object({
@@ -18,13 +24,14 @@ const registrationFormValidation = z
     password: z.string().min(4).max(8),
     confirmPassword: z.string().min(4).max(8),
     email: z.string().email(),
+    avatar: z.string(),
   })
   .refine((o) => o.confirmPassword === o.password, {
     message: 'Password fields do not match',
   });
 
 export const useRegister = globalAction$(
-  async ({ username, password, email, confirmPassword }, { fail }) => {
+  async ({ username, password, email, avatar }, { fail }) => {
     // let res: FailReturn<{ message: string }> | RegisterResponse;
     // if (password !== confirmPassword) {
     //   res = fail(400, { message: "Passwords don't match" });
@@ -63,7 +70,16 @@ export default component$(() => {
   const password = useSignal<string>('');
   const confirmPassword = useSignal<string>('');
   const keepLogging = useSignal<boolean>(false);
+  const imgSrc = useSignal<string>('');
   const register = useRegister();
+
+  useVisibleTask$(({ track }) => {
+    track(username);
+
+    if (username.value) {
+      imgSrc.value = generateAvatar(username.value.charAt(0).toUpperCase());
+    }
+  });
 
   return (
     <div class='form-container'>
@@ -73,7 +89,11 @@ export default component$(() => {
           {register.value?.formErrors?.join(',')}
         </div>
       )}
+      {imgSrc.value && (
+        <img src={imgSrc.value} alt='no image' width={200} height={200} />
+      )}
       <Form action={register}>
+        <input type='hidden' bind:value={imgSrc} name='avatar' />
         <Input
           id='username'
           name='username'
