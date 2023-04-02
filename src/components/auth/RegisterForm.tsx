@@ -1,11 +1,6 @@
 import { component$, useSignal } from '@builder.io/qwik';
-import {
-  FailReturn,
-  Form,
-  globalAction$,
-  zod$,
-  z,
-} from '@builder.io/qwik-city';
+import type { FailReturn } from '@builder.io/qwik-city';
+import { Form, globalAction$, zod$, z } from '@builder.io/qwik-city';
 import type { RegisterResponse } from '~/interfaces/user';
 import Button from '~/components/shared/button/Button';
 import Input from '~/components/shared/input/Input';
@@ -64,7 +59,6 @@ export default component$(() => {
   const email = useSignal<string>('test@test.com');
   const password = useSignal<string>('test');
   const confirmPassword = useSignal<string>('test');
-  const keepLogging = useSignal<boolean>(false);
   const register = useRegister();
 
   return (
