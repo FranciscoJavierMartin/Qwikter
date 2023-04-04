@@ -14,14 +14,15 @@ const registrationFormValidation = z
     password: z.string().min(4).max(8),
     confirmPassword: z.string().min(4).max(8),
     email: z.string().email(),
-    avatar: z.string(),
+    avatarColor: z.string(),
+    avatar: z.any(),
   })
   .refine((o) => o.confirmPassword === o.password, {
     message: 'Password fields do not match',
   });
 
 export const useRegister = globalAction$(
-  async ({ username, password, email }, { fail }) => {
+  async ({ username, password, email, avatarColor, avatar }, { fail }) => {
     let res: FailReturn<{ message: string }> | RegisterResponse;
 
     try {
@@ -34,12 +35,13 @@ export const useRegister = globalAction$(
           username,
           email,
           password,
-          avatarColor: 'blue',
+          avatarColor,
+          avatar,
         }),
       });
 
       const responseBody = await response.json();
-
+      console.log(responseBody);
       if (responseBody.error) {
         res = fail(responseBody.statusCode, {
           message: responseBody.message,
@@ -57,18 +59,19 @@ export const useRegister = globalAction$(
 );
 
 export default component$(() => {
-  const username = useSignal<string>('');
-  const email = useSignal<string>('');
-  const password = useSignal<string>('');
-  const confirmPassword = useSignal<string>('');
-  const imgSrc = useSignal<string>('');
+  const username = useSignal<string>('Test');
+  const email = useSignal<string>('test@test.com');
+  const password = useSignal<string>('test');
+  const confirmPassword = useSignal<string>('test');
+  const avatar = useSignal<string>('');
+  const avatarColor = useSignal<string>('');
   const register = useRegister();
 
   useVisibleTask$(({ track }) => {
     track(username);
 
     if (username.value) {
-      imgSrc.value = generateAvatar(username.value.charAt(0).toUpperCase());
+      avatar.value = generateAvatar(username.value.charAt(0).toUpperCase());
     }
   });
 
@@ -80,8 +83,8 @@ export default component$(() => {
           {register.value?.formErrors?.join(',')}
         </div>
       )}
-      {imgSrc.value && (
-        <img src={imgSrc.value} alt='no image' width={200} height={200} />
+      {avatar.value && (
+        <img src={avatar.value} alt='no image' width={200} height={200} />
       )}
       <Form
         action={register}
@@ -89,6 +92,8 @@ export default component$(() => {
           console.log('Success', e.detail.value as RegisterResponse);
         }}
       >
+        <input name='avatarColor' type='hidden' bind:value={avatarColor} />
+        <input name='avatar' type='hidden' bind:value={avatar} />
         <Input
           id='username'
           name='username'
